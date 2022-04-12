@@ -5,12 +5,24 @@ const Account = (props) => {
   let [amount, setAmount] = useState(0)
   let [balance, setBalance] = useState(0)
 
-  const handleClick = (event) => {
-    event.preventDefault()
-    if (isNaN(amount)) {
-      console.log('Not a number')
+  const handleDeposit = (e) => {
+    e.preventDefault()
+    if (isNaN(amount) || (amount <= 0)) {
+      console.log('Not an Accepted Amount')
     } else {
       setBalance(balance + Number(amount))
+    }
+    setAmount(0)
+  }
+
+  const handleWithdraw = (e) => {
+    e.preventDefault()
+    if (isNaN(amount) || (amount <= 0)) {
+      console.log('Not an Accepted Amount')
+    } else if (amount > balance) {
+      console.log('Insufficient Funds')
+    } else {
+      setBalance(balance - Number(amount))
     }
     setAmount(0)
   }
@@ -31,7 +43,7 @@ const Account = (props) => {
           type="text"
           placeholder="amount"
           value={amount}
-          onChange={(event) => setAmount(event.target.value)}
+          onChange={(e) => setAmount(e.target.value)}
         />
         <br />
         <br />
@@ -39,7 +51,13 @@ const Account = (props) => {
           className="btn"
           type="submit"
           value="Deposit"
-          onClick={handleClick}
+          onClick={handleDeposit}
+        />
+        <input
+          className="btn"
+          type="submit"
+          value="Withdraw"
+          onClick={handleWithdraw}
         />
       </div>
     </div>
