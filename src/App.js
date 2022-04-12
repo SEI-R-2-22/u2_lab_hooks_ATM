@@ -1,6 +1,6 @@
-import Account from './components/Account'
 import logo from './ga.png'
 import './styles/App.css'
+import Account from './components/Account'
 
 const App = () => {
 
